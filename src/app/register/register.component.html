@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<div class="wrapper">
+  <div class="jumbotron text-center">
+    <h1>Registration</h1>
+  </div>
+  <div *ngIf="users.length > 0">
+      <h2>Thank you for registering with us {{users[users.length - 1].firstName}}. We sent confirmation to {{users[users.length - 1].email}} and will send mail to {{users[users.length - 1].address}} {{users[users.length - 1].apt}}, {{users[users.length - 1].city}}, {{users[users.length - 1].state}}</h2>
+      <h2>Have a wonderful day!</h2>
+    </div>
+  <div>
+      <h2>Account Information</h2>
+      
+      <form (submit)="onSubmit()" #formData='ngForm'>
+        <h3>First Name: <input type="text" name="firstName" required minlength="4" maxlength="24" [(ngModel)]="user.firstName" #firstName='ngModel'><span *ngIf="firstName.invalid && firstName.pristine">  *</span><span *ngIf="firstName.invalid && firstName.dirty"> minimum length 4</span></h3>
+        
+        <h3>Last Name: <input type="text" name="lastName" required minlength="4" maxlength="24" [(ngModel)]="user.lastName" #lastName='ngModel'><span *ngIf="lastName.invalid && lastName.pristine">  *</span><span *ngIf="lastName.invalid && lastName.dirty"> minimum length 4</span></h3>
+        
+        <h3>Email: <input type="email" name="email" required  pattern="([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})" [(ngModel)]="user.email" #email='ngModel'><span *ngIf="email.invalid && email.pristine">  *</span><span *ngIf="email.invalid && email.dirty">must be valid email</span></h3> 
+        
+        <h3>Password: <input type="password" name="password" required pattern="^([a-zA-Z0-9@*#]{8,15})$" [(ngModel)]="user.password" #password='ngModel'><span *ngIf="password.invalid && password.pristine">  *</span><span *ngIf="password.invalid && password.dirty"> minimum length 8</span></h3>
+        
+        <h3>Confirm Password: <input type="password" name="cPassword" required pattern="^([a-zA-Z0-9@*#]{8,15})$" [(ngModel)]="user.cPassword" #cPassword='ngModel'><span *ngIf="cPassword.invalid && cPassword.pristine">  *</span><span *ngIf="user.password != user.cPassword"> Password must match</span></h3> 
+        
+        <h3>Street Address: <input type="text" name="address" required minlength="4" maxlength="50" [(ngModel)]="user.address" #address='ngModel'><span *ngIf="address.invalid && address.pristine">  *</span><span *ngIf="address.invalid && address.dirty"> minimum length 4</span></h3> 
+        
+        <h3>Unit/Apt: <input type="text" name="apt" required minlength="2" maxlength="24" [(ngModel)]="user.apt" #apt='ngModel'><span *ngIf="apt.invalid && apt.pristine">  *</span><span *ngIf="apt.invalid && apt.dirty"> minimum length 2</span></h3> 
+        
+        <h3>City: <input type="text" name="city" required minlength="4" maxlength="24" [(ngModel)]="user.city" #city='ngModel'><span *ngIf="city.invalid && city.pristine">  *</span><span *ngIf="city.invalid && city.dirty"> minimum length 4</span></h3> 
+        
+        <h3>State: <input type="selector" name="state" required minlength="2" maxlength="2" [(ngModel)]="user.state" #state='ngModel'><span *ngIf="state.invalid && state.pristine">  *</span><span *ngIf="state.invalid && state.dirty"> minimum length 2</span></h3>pristine
+        
+        <h3>I'm feeling lucky: <input required type="radio" name="lucky" value="Yes" [(ngModel)]="user.lucky" #lucky='ngModel'> Yes  <input required type="radio" name="lucky" value="No" [(ngModel)]="user.lucky" #lucky='ngModel'> No<span *ngIf="lucky.invalid">  *</span></h3>
+        <input type="submit" value="Register" class="btn btn-success" [disabled]="formData.invalid">
+      </form>
+
+  </div>
+</div>
